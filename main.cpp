@@ -1,14 +1,19 @@
 #include <curses.h>
-#include <stdio.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include "usb.h"
 
 #define VENDOR_ID   0x0925
 #define PRODUCT_ID  0x7001
 
-int main()
+int main(int argc, char *argv[])
 {
 	TankChassis chassis(VENDOR_ID, PRODUCT_ID);
+	int to = 50;
+
+	if (argv[1])
+		to = atoi(argv[1]);
 
 	if (!chassis.connected()) {
 		fprintf(stderr, "Unable to connect to usb device!");
@@ -19,7 +24,7 @@ int main()
 	bool quit = false;
 
 	initscr();
-	timeout(50);
+	timeout(to);
 
 	printw("Tank control prog. v0.1\n\r\nPress WASD to move\n\r");
 
