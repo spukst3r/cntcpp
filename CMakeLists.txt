@@ -15,5 +15,9 @@ if (USB_FOUND AND CURSES_FOUND)
 
 	target_link_libraries (${PROJ_TITLE} ${USB_LIBRARIES} ${CURSES_LIBRARIES})
 
+else (USB_FOUND AND CURSES_FOUND)
+
+	message(FATAL_ERROR "libusb or ncurses not found!")
+
 endif (USB_FOUND AND CURSES_FOUND)
 
